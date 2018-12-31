@@ -1,4 +1,3 @@
-import javax.swing.*;
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -102,11 +101,6 @@ class EchoThread extends Thread {
                 list.add(stringTokenizer.nextToken());
             }
 
-                /*String[] tab = {"0","0","0","0","0"};
-                for (int i = 0; i < list.size() ; i++) {
-                    tab[i] = list.get(i);
-                }
-*/
                 switch (list.get(0)) {
                     case "LOGIN":
                         System.out.println("Key: " + recvfrom);
@@ -140,14 +134,27 @@ class EchoThread extends Thread {
 
                         if(list.size() > 4)
                         {
-                            outToClient.writeBytes("ATAK OK" + '\n');
-                            //TODO atakowanie pól
+                            sendto = Server.game.attack(
+                                    Integer.parseInt(list.get(1)),
+                                    Integer.parseInt(list.get(2)),
+                                    Integer.parseInt(list.get(3)),
+                                    Integer.parseInt( list.get(4)),
+                                    threadID);
 
+                            System.out.println(sendto);
 
-                            sendto = "WYNIK DO WSZYSTKICH ";
+                            if(sendto == "ERROR"){
+                                outToClient.writeBytes("ERROR" + '\n');
 
-                            Server.value = sendto;
-                            Server.latch.countDown();
+                                userGuard++;
+
+                            }
+                            else {
+
+                                outToClient.writeBytes("ATAK OK" + '\n');
+                                Server.value = sendto + " ";
+                                Server.latch.countDown();
+                            }
                         }
                         else
                         {
@@ -188,14 +195,15 @@ class Game {
     int userID = 0;
     int dices = 0;
     Game(){
-        System.out.println(
-        EchoThread.currentThread().getName());
+
         for (int i = 1; i < 6 ; i++) {
             for (int j = 1; j < 6; j++) {
                 gameField[i][j] = userID + " " + dices;
             }
         }
 
+        gameField[2][2] = 1 + " " + 2;
+        gameField[3][2] = 2 + " " + 2;
     }
 
     public List gameView(){
@@ -210,7 +218,7 @@ class Game {
         return view;
     }
 
-    public void attack(int xFrom, int yFrom , int xTo, int yTo, int threadID){
+    public String attack(int xFrom, int yFrom , int xTo, int yTo, int threadID){
         List listAttack = new ArrayList();
 
         int oppositeID;
@@ -237,10 +245,9 @@ class Game {
 
         oppositeID = Integer.parseInt(listAttack.get(0).toString());
         oppositeDices = Integer.parseInt(listAttack.get(1).toString());
+        listAttack.clear();
 
-        int dicePower;
-
-        if(dices > 1 && userID == 1){
+        if(dices > 1 && userID == threadID){
             if(
                     xTo == xFrom - 1 && yTo == yFrom||
                     xTo == xFrom + 1 && yTo == yFrom||
@@ -248,36 +255,50 @@ class Game {
                     yTo == yFrom + 1 && xTo == xFrom
             ){
                 System.out.println("ATAK");
+                String wynik = "WYNIK ";
+                int result = 0 ;
+                int roll = 0;
 
-                //TODO RAND wynik ataku
+                for (int i = 0; i < dices ; i++) {
+                    roll =(int)(Math.random() * 6) + 1;
+                    result += roll;
+                    listAttack.add(roll);
 
-                /*
-                *   Dwie listy z wynikami na pętlach for dla każdego pola losuj
-                *   (int)(Math.random() * 6) + 1;
-                *
-                * 
-                * */
+                }
 
+                wynik += "GRACZ " + threadID + " " + dices + " " + listAttack + " ";
+                listAttack.clear();
 
-                int random =  (int)(Math.random() * 6) + 1;
+                for (int i = 0; i <oppositeDices ; i++) {
+                    roll = (int)(Math.random() * 6) + 1;
+                    result -= roll;
+                    listAttack.add(roll);
+                }
 
-                int result ;
+                wynik += "Obrońca " + oppositeID + " " + oppositeDices + " " + listAttack + " ";
+                listAttack.clear();
 
-
-
-                gameField[xFrom][yFrom]= threadID + " " + 1;
-                gameField[xTo][yTo] = threadID + " " + (dices - 1);
+                if(result > 0){
+                    gameField[xFrom][yFrom]= threadID + " " + 1;
+                    gameField[xTo][yTo] = threadID + " " + (dices - 1);
+                    System.out.println("wygrałeś");
+                    wynik += threadID ;
+                    return wynik;
+                }
+                else{
+                    gameField[xFrom][yFrom]= threadID + " " + 1;
+                    System.out.println("przegrałeś");
+                    wynik += oppositeID;
+                    return wynik;
+                }
             }
             else {
-                System.out.println("ERROR");
+                return "ERROR";
             }
-
-
         }
         else{
-            System.out.println("ERROR");
+            return "ERROR";
         }
-
     }
 
 }
