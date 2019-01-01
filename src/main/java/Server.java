@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.StringTokenizer;
 import java.util.concurrent.CountDownLatch;
 
+// TODO dwie sekundy bezczynności, lista wyników, atakowanie wielkorotne?,zapis logów do pliku, dodawnie kostek.
 public class Server {
     public static Game game = new Game();
 
@@ -14,12 +15,20 @@ public class Server {
 
     public static void main(String[] args) throws Exception {
 
+        for (int i = 1; i <6 ; i++) {
+            game.newField(i);
+        }
+
 
         ServerSocket serverSocket = new ServerSocket(3333);
         System.out.println("Oczekuję na połączenie");
 
-        Socket socket1 = serverSocket.accept();
-/*
+
+
+            Socket socket1 = serverSocket.accept();
+
+        /*
+
         Socket socket2 = serverSocket.accept();
         Socket socket3 = serverSocket.accept();
 */
@@ -36,9 +45,10 @@ public class Server {
 
 
         while (true){
-
-            thread1.run();
-            EchoThread.clientValue += value;
+            if (thread1.threadID != 0) {
+                thread1.run();
+                EchoThread.clientValue += value;
+            }
             /*thread2.run();
             EchoThread.clientValue += value;
             thread3.run();
@@ -52,11 +62,16 @@ public class Server {
 
 class EchoThread extends Thread {
     protected Socket socket;
-    public int guard = 0;
+    public final int maxThread = 1;
     static String clientValue = "";
-
-
+    public int numberGamers = 0;
     public int threadID;
+
+
+    int tura = 1;
+    int round = 0;
+    int userGuard = 0;
+
     public EchoThread(Socket clientSocket, int ID) {
         this.socket = clientSocket;
         this.threadID = ID;
@@ -64,9 +79,7 @@ class EchoThread extends Thread {
     }
 
     synchronized public void run() {
-        currentThread().setName(threadID+"");
 
-        int userGuard = 0;
         boolean userGuardSwitch = true;
 
         try {
@@ -84,53 +97,55 @@ class EchoThread extends Thread {
             DataOutputStream outToClient = new DataOutputStream(
                     socket.getOutputStream());
 
-            if(guard == 0) {
+            if(round == 0) {
                 outToClient.writeBytes("POLACZONO" + '\n');
             }
             else{
-
-                outToClient.writeBytes(clientValue + "TWOJ RUCH" + '\n');
-            }
+                outToClient.writeBytes(clientValue + '\n');
+                plansza(outToClient);
+                 }
 
             do {
 
-            recvfrom = inFromClient.readLine();
+                outToClient.writeBytes("TWOJ RUCH" + '\n' );
+
+                recvfrom = inFromClient.readLine();
             stringTokenizer = new StringTokenizer(recvfrom);
+
+            System.out.println("Key: " + recvfrom);
 
             while (stringTokenizer.hasMoreTokens()) {
                 list.add(stringTokenizer.nextToken());
             }
 
+
+
                 switch (list.get(0)) {
                     case "LOGIN":
-                        System.out.println("Key: " + recvfrom);
-                        if(guard == 0){
-                            outToClient.writeBytes("START " + threadID + " 1" + '\n');
-                            guard++;
 
-                            for (int i = 0; i < 25 ; i++) {
-                                outToClient.writeBytes(
-                                        Server.game.gameView().get(i).toString()
-                                        + '\n');
-                            }
+                        if(round == 0){
+                           String login = list.get(1);
+                            outToClient.writeBytes("START " + threadID + " 1" + '\n');
+
+                            numberGamers++;
+
                         }
                         else {
                             outToClient.writeBytes("ERROR" + '\n');
                             userGuard++;
+                            round--;
                         }
                        list.clear();
 
                         userGuardSwitch = false;
                         break;
                     case "PASS":
-                        System.out.println("Key: " + recvfrom);
                         outToClient.writeBytes("PASS OK" + '\n');
                         userGuardSwitch = false;
                         list.clear();
 
                         break;
                     case "ATAK":
-                        System.out.println("Key: " + recvfrom);
 
                         if(list.size() > 4)
                         {
@@ -145,9 +160,7 @@ class EchoThread extends Thread {
 
                             if(sendto == "ERROR"){
                                 outToClient.writeBytes("ERROR" + '\n');
-
                                 userGuard++;
-
                             }
                             else {
 
@@ -161,15 +174,10 @@ class EchoThread extends Thread {
                             outToClient.writeBytes("ERROR" + '\n');
                             userGuard++;
                         }
-
-
                         list.clear();
-
-                        outToClient.writeBytes("BY ZAKONCZYC KOLEJKE WPISZ PASS" + '\n');
                         userGuardSwitch = true;
                         break;
                     default:
-                        System.out.println("Key: " + recvfrom);
                         outToClient.writeBytes("ERROR" + '\n');
                         list.clear();
 
@@ -180,14 +188,46 @@ class EchoThread extends Thread {
                 if (userGuard == 50)
                 {
                     threadID = 0;
+                    outToClient.writeBytes("TURA " + tura + numberGamers + '\n');
+                    numberGamers--;
                     socket.close();
                 }
            }while(userGuardSwitch);
+
+            if(threadID == maxThread && round != 0 ){
+                Server.value = "KONIEC RUNDY ";
+                Server.latch.countDown();
+
+
+            }
+
+            round++;
+            if(numberGamers == 0 /*FIXME 1 */ || round == 100){
+                outToClient.writeBytes("TURA " + tura + " " + numberGamers + '\n');
+                    tura++;
+
+            }
+
+
+
         } catch (IOException e) {
             e.printStackTrace();
             return;
         }
     }
+
+    public void plansza(DataOutputStream outToClient) throws IOException {
+        List view = Server.game.gameView();
+        for (int i = 0; i < 25 ; i++) {
+            outToClient.writeBytes(
+                    view.get(i).toString()
+                            + '\n');
+        }
+
+
+    }
+
+
 }
 
 class Game {
@@ -202,10 +242,45 @@ class Game {
             }
         }
 
-        gameField[2][2] = 1 + " " + 2;
-        gameField[3][2] = 2 + " " + 2;
     }
 
+    public void addField(int threadID){
+
+        StringTokenizer stringTokenizer =
+                new StringTokenizer(gameField[1][1]);
+
+        List listAttack = new ArrayList();
+
+        while (stringTokenizer.hasMoreTokens()) {
+            listAttack.add(stringTokenizer.nextToken());
+        }
+
+        userID = Integer.parseInt(listAttack.get(0).toString());
+        dices += Integer.parseInt(listAttack.get(1).toString());
+
+        if (userID == threadID){
+
+
+        }
+
+        listAttack.clear();
+
+    }
+
+    public void newField(int threadID) {
+        int randX;
+        int randY;
+        int guard = 0;
+        while(guard < 3) {
+            randX = (int)(Math.random() * 5) + 1;
+            randY = (int)(Math.random() * 5) + 1;
+            if (String.valueOf(gameField[randX][randY]).equals("0 0")){
+                gameField[randX][randY] = threadID + " " + 6; /// FIXME
+                guard++;
+            }
+        }
+        guard = 0;
+    }
     public List gameView(){
         List view = new ArrayList<>();
         for (int i = 1; i < 6 ; i++) {
@@ -216,6 +291,30 @@ class Game {
         }
 
         return view;
+    }
+
+    public int score(int threadID) {
+        dices = 0;
+        for (int i = 1; i < 6; i++) {
+            for (int j = 1; j < 6; j++) {
+                StringTokenizer stringTokenizer =
+                        new StringTokenizer(gameField[i][j]);
+                List listAttack = new ArrayList();
+
+                while (stringTokenizer.hasMoreTokens()) {
+                    listAttack.add(stringTokenizer.nextToken());
+                }
+                userID = Integer.parseInt(listAttack.get(0).toString());
+                if (userID == threadID) {
+                    dices += Integer.parseInt(listAttack.get(1).toString());
+                }
+                listAttack.clear();
+
+            }
+
+
+        }
+    return dices;
     }
 
     public String attack(int xFrom, int yFrom , int xTo, int yTo, int threadID){
@@ -300,5 +399,4 @@ class Game {
             return "ERROR";
         }
     }
-
 }
