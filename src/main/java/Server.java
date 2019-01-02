@@ -3,10 +3,11 @@ import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.List;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.StringTokenizer;
 import java.util.concurrent.CountDownLatch;
 
-// TODO dwie sekundy bezczynności, lista wyników, atakowanie wielkorotne?,zapis logów do pliku, dodawnie kostek.
+// TODO dwie sekundy bezczynności, lista wyników.
 public class Server {
     public static Game game = new Game();
 
@@ -14,6 +15,7 @@ public class Server {
     public static String value = " ";
 
     public static void main(String[] args) throws Exception {
+
 
         for (int i = 1; i <6 ; i++) {
             game.newField(i);
@@ -23,46 +25,57 @@ public class Server {
         ServerSocket serverSocket = new ServerSocket(3333);
         System.out.println("Oczekuję na połączenie");
 
-
-
             Socket socket1 = serverSocket.accept();
-
-        /*
-
         Socket socket2 = serverSocket.accept();
-        Socket socket3 = serverSocket.accept();
+  /*      Socket socket3 = serverSocket.accept();
+        Socket socket4 = serverSocket.accept();
+            Socket socket5 = serverSocket.accept();
 */
-        //Socket socket4 = serverSocket.accept();
-        //    Socket socket5 = serverSocket.accept();
-
         EchoThread thread1 = new EchoThread(socket1,1);
-/*
+
         EchoThread thread2 = new EchoThread(socket2,2);
-        EchoThread thread3 = new EchoThread(socket3,3);
-*/
-        //      EchoThread thread4 = new EchoThread(socket4);
-        //      EchoThread thread5 = new EchoThread(socket5);
+/*        EchoThread thread3 = new EchoThread(socket3,3);
 
 
-        while (true){
+              EchoThread thread4 = new EchoThread(socket4,4);
+              EchoThread thread5 = new EchoThread(socket5,5);
+  */      while (true){
             if (thread1.threadID != 0) {
                 thread1.run();
+                EchoThread.clientValue = value;
+            }
+
+            if (thread2.threadID != 0) {
+                thread2.run();
                 EchoThread.clientValue += value;
             }
-            /*thread2.run();
-            EchoThread.clientValue += value;
-            thread3.run();
-            EchoThread.clientValue += value;
-            //      thread4.run();
-            *///   thread5.run();
-        }
+/*
+            if (thread3.threadID != 0) {
+                thread3.run();
+                EchoThread.clientValue += value;
+            }
+
+            if (thread4.threadID != 0) {
+                thread4.run();
+                EchoThread.clientValue += value;
+            }
+
+            if (thread5.threadID != 0) {
+                thread5.run();
+                EchoThread.clientValue += value;
+            }
+    */    }
     }
 }
 
 
 class EchoThread extends Thread {
+
     protected Socket socket;
-    public final int maxThread = 1;
+    public final int maxThread = 2;
+    public final int LICZBA_RUND = 5;
+    public final int LICZBA_TUR = 3;
+
     static String clientValue = "";
     public int numberGamers = 0;
     public int threadID;
@@ -71,10 +84,19 @@ class EchoThread extends Thread {
     int tura = 1;
     int round = 0;
     int userGuard = 0;
+    PrintWriter zapis;
 
     public EchoThread(Socket clientSocket, int ID) {
         this.socket = clientSocket;
         this.threadID = ID;
+
+        try {
+            String name = "log" + threadID + ".txt";
+            this.zapis = new PrintWriter(name);
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+
 
     }
 
@@ -98,23 +120,30 @@ class EchoThread extends Thread {
                     socket.getOutputStream());
 
             if(round == 0) {
+                zapis.println("Server to thread " + threadID + ": POLACZONO");
                 outToClient.writeBytes("POLACZONO" + '\n');
             }
             else{
+                zapis.println("Server to thread " + threadID + ": " + clientValue);
+                zapis.println("Server to thread " + threadID + ": PLANSZA");
                 outToClient.writeBytes(clientValue + '\n');
                 plansza(outToClient);
                  }
 
             do {
-
+                zapis.println("Server to thread " + threadID + " TWOJ RUCH");
                 outToClient.writeBytes("TWOJ RUCH" + '\n' );
 
                 recvfrom = inFromClient.readLine();
+                recvfrom.toUpperCase();
             stringTokenizer = new StringTokenizer(recvfrom);
 
-            System.out.println("Key: " + recvfrom);
+
+
+            zapis.println("Thread " + threadID + ": " + recvfrom);
 
             while (stringTokenizer.hasMoreTokens()) {
+
                 list.add(stringTokenizer.nextToken());
             }
 
@@ -125,12 +154,15 @@ class EchoThread extends Thread {
 
                         if(round == 0){
                            String login = list.get(1);
+                            zapis.println("Server to thread " + threadID + ": START" + threadID + "1" );
                             outToClient.writeBytes("START " + threadID + " 1" + '\n');
 
                             numberGamers++;
 
                         }
                         else {
+                            zapis.println("Server to thread " + threadID + ": ERROR" );
+
                             outToClient.writeBytes("ERROR" + '\n');
                             userGuard++;
                             round--;
@@ -140,7 +172,10 @@ class EchoThread extends Thread {
                         userGuardSwitch = false;
                         break;
                     case "PASS":
-                        outToClient.writeBytes("PASS OK" + '\n');
+
+                        zapis.println("Server to thread " + threadID + ": OK" );
+
+                        outToClient.writeBytes("OK" + '\n');
                         userGuardSwitch = false;
                         list.clear();
 
@@ -159,18 +194,27 @@ class EchoThread extends Thread {
                             System.out.println(sendto);
 
                             if(sendto == "ERROR"){
+
+                                zapis.println("Server to thread " + threadID + ": ERROR" );
+
                                 outToClient.writeBytes("ERROR" + '\n');
                                 userGuard++;
                             }
                             else {
 
-                                outToClient.writeBytes("ATAK OK" + '\n');
+                                zapis.println("Server to thread " + threadID + ": OK" );
+
+                                outToClient.writeBytes(sendto + "OK" + '\n');
+
                                 Server.value = sendto + " ";
                                 Server.latch.countDown();
                             }
                         }
                         else
                         {
+
+                            zapis.println("Server to thread " + threadID + ": ERROR" );
+
                             outToClient.writeBytes("ERROR" + '\n');
                             userGuard++;
                         }
@@ -178,6 +222,9 @@ class EchoThread extends Thread {
                         userGuardSwitch = true;
                         break;
                     default:
+
+                        zapis.println("Server to thread " + threadID + ": ERROR" );
+
                         outToClient.writeBytes("ERROR" + '\n');
                         list.clear();
 
@@ -188,25 +235,68 @@ class EchoThread extends Thread {
                 if (userGuard == 50)
                 {
                     threadID = 0;
+                    zapis.println("Server to thread " + threadID + ": TURA" + tura + numberGamers );
+
                     outToClient.writeBytes("TURA " + tura + numberGamers + '\n');
                     numberGamers--;
                     socket.close();
                 }
            }while(userGuardSwitch);
 
+
+            zapis.println("Server to thread " + threadID + ": KONIEC RUNDY" );
+            outToClient.writeBytes("KONIEC RUNDY" + '\n');
+
             if(threadID == maxThread && round != 0 ){
+                for (int i = 1; i < 6 ; i++) {
+                    Server.game.addField(i);
+                }
+/*
                 Server.value = "KONIEC RUNDY ";
                 Server.latch.countDown();
 
+*/
 
             }
 
             round++;
-            if(numberGamers == 0 /*FIXME 1 */ || round == 100){
+            if(numberGamers == 1 /*FIXME 1 */ || round == LICZBA_RUND + 1){//wpisz o jeden wiecej 10 = 9 rund
+                zapis.println("Server to thread " + threadID + ": TURA" + tura + " " + numberGamers );
+
                 outToClient.writeBytes("TURA " + tura + " " + numberGamers + '\n');
-                    tura++;
+//FIXME
+                Server.game.score(threadID);
+                tura++;
+                for (int i = 1; i <= maxThread ; i++) {
+                    outToClient.writeBytes( "WYNIKI KURŁA " + Server.game.score(threadID));
+
+                }
+
+                if(threadID == maxThread){
+                Server.game.ResetGame();
+                Server.value = "";
+
+
+                    for (int i = 1; i <6 ; i++) {
+                        Server.game.newField(i);
+                    }
+                }
+
+
+
+                    round = 1;
+                if(tura == LICZBA_TUR + 1){ // wpisz o 1 więcej
+                    zapis.println("Server to thread " + threadID + ": KONIEC");
+                    outToClient.writeBytes("KONIEC "+ '\n');
+                    System.out.println(threadID+ " disconnected.");
+                zapis.close();
+                    socket.close();
+
+                }
+
 
             }
+
 
 
 
@@ -232,22 +322,27 @@ class EchoThread extends Thread {
 
 class Game {
     String[][] gameField = new String[6][6];
-    int userID = 0;
-    int dices = 0;
-    Game(){
+    int userID;
+    int dices;
+    Random r = new Random();
 
+    Game(){
+        ResetGame();
+
+    }
+
+    public void ResetGame(){
+        userID = 0;
+        dices = 0;
         for (int i = 1; i < 6 ; i++) {
             for (int j = 1; j < 6; j++) {
                 gameField[i][j] = userID + " " + dices;
             }
         }
-
     }
-
-    public void addField(int threadID){
-
+    public List StringTokenizer(int i, int j){
         StringTokenizer stringTokenizer =
-                new StringTokenizer(gameField[1][1]);
+                new StringTokenizer(gameField[i][j]);
 
         List listAttack = new ArrayList();
 
@@ -255,15 +350,56 @@ class Game {
             listAttack.add(stringTokenizer.nextToken());
         }
 
-        userID = Integer.parseInt(listAttack.get(0).toString());
-        dices += Integer.parseInt(listAttack.get(1).toString());
+        return listAttack;
+    }
 
-        if (userID == threadID){
+    public void addField(int threadID){
+
+        dices = 0;
+        List fieldsX = new ArrayList();
+        List fieldsY = new ArrayList();
+
+        List listAttack;
+
+
+        for (int i = 1; i < 6; i++) {
+            for (int j = 1; j < 6; j++) {
+                listAttack = StringTokenizer(i,j);
+                userID = Integer.parseInt(listAttack.get(0).toString());
+
+                if (userID == threadID){
+                dices++;
+                fieldsX.add(i);
+                fieldsY.add(j);
+                }
+                listAttack.clear();
+            }
+        }
+        int guard = 0;
+
+        while (dices > 0 && guard < 5 ) {
+
+            int rand = r.nextInt(fieldsX.size());
+            listAttack = StringTokenizer(
+                    (int) fieldsX.get(rand),
+                    (int) fieldsY.get(rand)
+            );
+
+
+            guard++;
+
+
+            int temp = Integer.parseInt(listAttack.get(1).toString());
+            while (temp < 8 && dices > 0) {
+                temp++;
+                dices--;
+                guard = 0;
+            }
+            gameField[(int) fieldsX.get(rand)]
+                    [(int) fieldsY.get(rand)]  = threadID + " " + temp;
 
 
         }
-
-        listAttack.clear();
 
     }
 
@@ -271,11 +407,11 @@ class Game {
         int randX;
         int randY;
         int guard = 0;
-        while(guard < 3) {
+        while(guard < 2) {
             randX = (int)(Math.random() * 5) + 1;
             randY = (int)(Math.random() * 5) + 1;
             if (String.valueOf(gameField[randX][randY]).equals("0 0")){
-                gameField[randX][randY] = threadID + " " + 6; /// FIXME
+                gameField[randX][randY] = threadID + " " + 2;
                 guard++;
             }
         }
@@ -293,28 +429,30 @@ class Game {
         return view;
     }
 
-    public int score(int threadID) {
+    public int myScore(int threadID) {
         dices = 0;
         for (int i = 1; i < 6; i++) {
             for (int j = 1; j < 6; j++) {
-                StringTokenizer stringTokenizer =
-                        new StringTokenizer(gameField[i][j]);
-                List listAttack = new ArrayList();
+                List listAttack = StringTokenizer(i,j);
 
-                while (stringTokenizer.hasMoreTokens()) {
-                    listAttack.add(stringTokenizer.nextToken());
-                }
                 userID = Integer.parseInt(listAttack.get(0).toString());
                 if (userID == threadID) {
                     dices += Integer.parseInt(listAttack.get(1).toString());
                 }
                 listAttack.clear();
-
             }
-
-
         }
+
+
     return dices;
+    }
+
+    public int[] score(int threadID){
+
+        int[]threads = new int[5];
+        threads[threadID - 1] += myScore(threadID);
+
+    return threads;
     }
 
     public String attack(int xFrom, int yFrom , int xTo, int yTo, int threadID){
@@ -369,7 +507,8 @@ class Game {
                 listAttack.clear();
 
                 for (int i = 0; i <oppositeDices ; i++) {
-                    roll = (int)(Math.random() * 6) + 1;
+                    roll = r.nextInt(7) +1;
+
                     result -= roll;
                     listAttack.add(roll);
                 }
