@@ -7,14 +7,14 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 import java.util.stream.Stream;
 
-// TODO dwie sekundy bezczynności, lista wyników.
+// TODO dwie sekundy bezczynności.
 public class Server {
     public static Game game = new Game();
 
     public static CountDownLatch latch = new CountDownLatch(1);
-    public static String value = " ";
+    public static String value = " ";//Sprawdź jak działą
 
-    public static String[] logins = new String[5];
+    public static String[] logins = new String[2];
     public static Map<String, Integer> score = new HashMap<String, Integer>();
 
     public static void main(String[] args) throws Exception {
@@ -24,16 +24,7 @@ public class Server {
         }
 
 
-        boolean start = true;
-        if(start == true){
-            for (int i = 0; i < 5; i++) {
-                logins[i] = "NAZWA" + i;//przypisz tu login z threadów
-                score.put(logins[i],0);
-
-            }
-            start = false;
-        }
-
+/*
 
         System.out.println(score.toString());
         for (int i = 1; i < 6 ; i++) {
@@ -50,6 +41,7 @@ public class Server {
 
         System.out.println(game.finalScore(score, logins));
 
+*/
 
         ServerSocket serverSocket = new ServerSocket(3333);
         System.out.println("Oczekuję na połączenie");
@@ -73,33 +65,51 @@ while (true){
 
             if (thread1.threadID != 0) {
                 thread1.run();
+              logins[0] =  thread1.login;
                 EchoThread.clientValue = value;
             }
 
             if (thread2.threadID != 0) {
                 thread2.run();
-                EchoThread.clientValue += value;
+                logins[1] =  thread2.login;
+                EchoThread.clientValue = value;
             }
 /*
             if (thread3.threadID != 0) {
                 thread3.run();
+                logins[2] =  thread3.login;
                 EchoThread.clientValue += value;
             }
             if (thread4.threadID != 0) {
                 thread4.run();
+                logins[3] =  thread4.login;
                 EchoThread.clientValue += value;
             }
             if (thread5.threadID != 0) {
                 thread5.run();
+                logins[4] =  thread5.login;
                 EchoThread.clientValue += value;
             }
-    */    }
+    */
+
+
+
+    boolean start = true;
+    if(start == true){
+        for (int i = 0; i < logins.length ; i++) {
+            score.put(logins[i],0);
+        }
+        start = false;
+    }
+
+}
     }
 }
 
 
 class EchoThread extends Thread {
 
+    public String login;
     protected Socket socket;
     public int maxThread = 2;
     public final int LICZBA_RUND = 5;
@@ -182,7 +192,8 @@ class EchoThread extends Thread {
                     case "LOGIN":
 
                         if(round == 0){
-                            String login = list.get(1);
+
+                            login = list.get(1);
                             zapis.println("Server to thread " + threadID + ": START" + threadID + "1" );
                             outToClient.writeBytes("START " + threadID + " 1" + '\n');
 
@@ -310,7 +321,7 @@ class EchoThread extends Thread {
 
 
                 if(tura == LICZBA_TUR){ // wpisz o 1 więcej
-                    zapis.println("Server to thread " + threadID + ": KONIEC");
+                    zapis.println("Server to thread " + threadID + ": KONIEC " + Server.game.finalScore(Server.score,Server.logins));
                     outToClient.writeBytes("KONIEC " + Server.game.finalScore(Server.score,Server.logins) + '\n');
                     System.out.println(threadID+ " disconnected.");
                     zapis.close();
