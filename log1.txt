@@ -1,0 +1,564 @@
+Server to thread 1: POLACZONO
+Thread 1: LOGIN s1
+Server to thread 1: START11
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1{s1=5, s2=1, s3=2, s4=3, s5=4}
+Server to thread 1: TURA1 5
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1{s1=10, s2=2, s3=4, s4=6, s5=8}
+Server to thread 1: TURA2 5
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1{s1=15, s2=3, s3=6, s4=9, s5=12}
+Server to thread 1: TURA3 5
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1{s1=19, s2=4, s3=11, s4=11, s5=15}
+Server to thread 1: TURA4 4
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1{s1=23, s2=5, s3=16, s4=13, s5=18}
+Server to thread 1: TURA5 4
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: ASS
+Server to thread 1: ERROR
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1{s1=26, s2=6, s3=20, s4=15, s5=23}
+Server to thread 1: TURA6 3
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: SS
+Server to thread 1: ERROR
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1{s1=29, s2=7, s3=24, s4=17, s5=28}
+Server to thread 1: TURA7 3
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1{s1=32, s2=8, s3=28, s4=19, s5=33}
+Server to thread 1: TURA8 3
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1{s1=35, s2=9, s3=32, s4=21, s5=38}
+Server to thread 1: TURA9 3
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1: []
+Server to thread 1: PLANSZA
+Server to thread 1 TWOJ RUCH
+Thread 1: PASS
+Server to thread 1: OK
+Server to thread 1: KONIEC RUNDY
+Server to thread 1{s1=37, s2=10, s3=35, s4=26, s5=42}
+Server to thread 1: TURA10 2
+Server to thread 1: KONIEC s2 10 s4 26 s3 35 s1 37 s5 42 
